@@ -18,4 +18,11 @@ public class TeamsController extends AbstractRestController implements TeamsApi 
     public ResponseEntity<List<Team>> teamsGet(){
         return getRespond(teams);
     }
+
+    @Override
+    public ResponseEntity<Void> teamsPost(Team team) {
+        teams.add(team);
+        return postRespond();
+
+    }
 }
