@@ -117,7 +117,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TeamInput'
+              $ref: '#/components/schemas/Team'
       responses:
         '201':
           description: Team created successfully
@@ -160,7 +160,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TeamInput'
+              $ref: '#/components/schemas/Team'
       responses:
         '200':
           description: Team updated successfully
@@ -208,19 +208,6 @@ components:
       properties:
         teamId:
           type: integer
-        teamName:
-          type: string
-        points:
-          type: integer
-        foundingYear:
-          type: integer
-        groupName:
-          type: string
-          enum: [A, B, C, D]
-
-    TeamInput:
-      type: object
-      properties:
         teamName:
           type: string
         points:
