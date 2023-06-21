@@ -1,6 +1,8 @@
 package com.ubs.m295.jdbc.dao;
 
 import ch.ubs.m295.generated.v1.dto.Team;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,10 +20,13 @@ public class TeamsDao {
     private final static String update = "UPDATE teams SET teamName = :teamName, points = :points, foundingYear = :foundingYear, groupName = :groupName WHERE teamId = :teamId";
     private final static String delete = "DELETE FROM teams WHERE teamId = :teamId";
 
+    private static Logger Logger = LoggerFactory.getLogger(TeamsDao.class);
+
 
     public TeamsDao(NamedParameterJdbcTemplate namedParameterJdbcTemplate){
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
-        System.out.println(getAllTeams());
+        Logger.info("Initializing TeamsDao");
+        Logger.debug("Retrieving all teams on initialization: {}", getAllTeams());
     }
 
     public void insertTeam(Team teams) {
@@ -35,13 +40,13 @@ public class TeamsDao {
         namedParameterJdbcTemplate.update(insert, params);
     }
 
-//GET ALL
+
 
     public List<Team> getAllTeams() {
         return namedParameterJdbcTemplate.query(selectAll, new TeamRowMapper());
     }
 
-//GET BY ID
+
 
     public Optional<Team> getTeamById(int teamId) {
         MapSqlParameterSource params = new MapSqlParameterSource()
@@ -53,7 +58,6 @@ public class TeamsDao {
         }
         return Optional.of(teams.get(0));
     }
-//ROWMAPPER
 
     private static class TeamRowMapper implements RowMapper<Team> {
         @Override
@@ -68,7 +72,6 @@ public class TeamsDao {
         }
     }
 
-//DELETE
 
     public boolean deleteTeam(int teamId) {
         MapSqlParameterSource params = new MapSqlParameterSource()
@@ -80,7 +83,6 @@ public class TeamsDao {
         return false;
     }
 
-//UPDATE
 
     public boolean updateTeam(Team team) {
         MapSqlParameterSource params = new MapSqlParameterSource()

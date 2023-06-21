@@ -67,7 +67,7 @@ public class GroupsDao {
 
     public boolean deleteGroup(String groupName) {
         MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("groupName", ChampionsLeagueGroup.GroupNameEnum.valueOf(groupName));
+                .addValue("groupName", groupName);
         int inDb = namedParameterJdbcTemplate.update(delete, params);
         if (inDb == 1) {
             return true;

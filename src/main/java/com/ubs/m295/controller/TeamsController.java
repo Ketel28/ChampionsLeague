@@ -22,7 +22,7 @@ public class TeamsController implements TeamsApi{
 
     private TeamsDao dao;
 
-    private static Logger Logger = LoggerFactory.getLogger(TeamsDao.class);
+    private static Logger Logger = LoggerFactory.getLogger(TeamsController.class);
 
     @Override
     public Optional<NativeWebRequest> getRequest() {
@@ -31,33 +31,82 @@ public class TeamsController implements TeamsApi{
 
     @Override
     public ResponseEntity<List<Team>> teamsGet() {
-        return ResponseEntity.ok(dao.getAllTeams());
+        try {
+            Logger.info("Received request to retrieve all teams");
+            return ResponseEntity.ok(dao.getAllTeams());
+
+        } catch (Exception exception) {
+            Logger.error("Error occurred while retrieving teams", exception);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<Team> teamsPost(Team team) {
-        dao.insertTeam(team);
-        return ResponseEntity.ok(team);
-        //Logger.info("Hat nicht geklappt");
+        try {
+            Logger.info("Received request to insert a team: {}", team.getTeamName());
+            dao.insertTeam(team);
+            Logger.info("Inserted team: {}", team.getTeamName());
+            return ResponseEntity.ok(team);
+        } catch (Exception exception) {
+            Logger.error("Error occurred while inserting a team", exception);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<Void> teamsTeamIdDelete(Integer teamId) {
-        dao.deleteTeam(teamId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            Logger.info("Received request to delete team with ID: {}", teamId);
+            boolean success = dao.deleteTeam(teamId);
+            if (success) {
+                Logger.info("Deleted team with ID: {}", teamId);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                Logger.info("Team not found with ID: {}", teamId);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            Logger.error("Error occurred while deleting a team", exception);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
 
     }
 
     @Override
     public ResponseEntity<Team> teamsTeamIdGet(Integer teamId) {
-        dao.getTeamById(teamId);
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        try {
+            Logger.info("Received request to retrieve team with ID: {}", teamId);
+            Optional<Team> team = dao.getTeamById(teamId);
+            if (team.isPresent()) {
+                Logger.info("Retrieved team with ID: {}", teamId);
+                return ResponseEntity.ok(team.get());
+            } else {
+                Logger.info("Team not found with ID: {}", teamId);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            Logger.error("Failed to retrieve team", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity<Team> teamsTeamIdPut(Integer teamId, Team team) {
-        dao.updateTeam(team);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            boolean success = dao.updateTeam(team);
+            if (success) {
+                Logger.info("Updated team with ID: {}", teamId);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                Logger.info("Team not found with ID: {}", teamId);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            Logger.error("Failed to update team", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     public TeamsController(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {

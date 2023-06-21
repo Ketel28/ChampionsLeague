@@ -19,7 +19,7 @@ public class GroupsController implements GroupsApi{
 
     private GroupsDao dao;
 
-    private static Logger Logger = LoggerFactory.getLogger(GroupsDao.class);
+    private static Logger Logger = LoggerFactory.getLogger(GroupsController.class);
 
     @Override
     public Optional<NativeWebRequest> getRequest() {
@@ -28,33 +28,85 @@ public class GroupsController implements GroupsApi{
 
     @Override
     public ResponseEntity<List<ChampionsLeagueGroup>> groupsGet() {
-        return ResponseEntity.ok(dao.getAllGroups());
+        try {
+            Logger.info("Received request to retrieve all groups");
+            List<ChampionsLeagueGroup> groups = dao.getAllGroups();
+            Logger.info("Retrieved {} groups", groups.size());
+            return ResponseEntity.ok(groups);
+        } catch (Exception exception) {
+            Logger.error("Failed to retrieve groups", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
     @Override
     public ResponseEntity<ChampionsLeagueGroup> groupsPost(ChampionsLeagueGroup group) {
-        dao.insertGroup(group);
-        return ResponseEntity.ok(group);
-        //Logger.info("Hat nicht geklappt");
+        try {
+            Logger.info("Received request to insert a group: {}", group.getGroupName());
+            dao.insertGroup(group);
+            Logger.info("Inserted group: {}", group.getGroupName());
+            return ResponseEntity.ok(group);
+        } catch (Exception exception) {
+            Logger.error("Failed to insert group", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity<Void> groupsGroupNameDelete(String groupName) {
-        dao.deleteGroup(groupName);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            Logger.info("Received request to delete group with name: {}", groupName);
+            boolean success = dao.deleteGroup(groupName);
+            if (success) {
+                Logger.info("Deleted group with name: {}", groupName);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                Logger.info("Group not found with name: {}", groupName);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            Logger.error("Failed to delete group", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 
     }
 
     @Override
     public ResponseEntity<ChampionsLeagueGroup> groupsGroupNameGet(String groupName) {
-        dao.getGroupByName(groupName);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            Logger.info("Received request to retrieve group with name: {}", groupName);
+            Optional<ChampionsLeagueGroup> group = dao.getGroupByName(groupName);
+            if (group.isPresent()) {
+                Logger.info("Retrieved group with name: {}", groupName);
+                return ResponseEntity.ok(group.get());
+            } else {
+                Logger.info("Group not found with name: {}", groupName);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception exception) {
+            Logger.error("Failed to retrieve group", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @Override
     public ResponseEntity<ChampionsLeagueGroup> groupsGroupNamePut(String groupName, ChampionsLeagueGroup group) {
-        dao.updateGroup(group);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            Logger.info("Received request to update group with name: {}", groupName);
+            group.setGroupName(ChampionsLeagueGroup.GroupNameEnum.valueOf(groupName));
+            boolean success = dao.updateGroup(group);
+            if (success) {
+                Logger.info("Updated group with name: {}", groupName);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                Logger.info("Group not found with name: {}", groupName);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            Logger.error("Failed to update group", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     public GroupsController(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
