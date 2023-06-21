@@ -10,7 +10,7 @@ MySQL,
 IntelliJ,
 Spring Boot*
 
-For users who want to dive into my code, I provide a detailed explanation and guide [Setup](https:/https://github.com/Ketel28/m295-Kerem-Telli/edit/main/README.md#setup//).
+For users who want to dive into my code, I provide a detailed explanation and guide [Setup](https://github.com/Ketel28/m295-Kerem-Telli/edit/main/README.md#setup).
 
 ## Structure
 
