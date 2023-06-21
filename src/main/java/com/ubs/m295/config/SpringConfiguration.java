@@ -1,7 +1,7 @@
-package com.ubs.m295.jdbc;
+package com.ubs.m295.config;
 
-import com.ubs.m295.jdbc.dao.GroupsDao;
-import com.ubs.m295.jdbc.dao.TeamsDao;
+import com.ubs.m295.dao.GroupsDao;
+import com.ubs.m295.dao.TeamsDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

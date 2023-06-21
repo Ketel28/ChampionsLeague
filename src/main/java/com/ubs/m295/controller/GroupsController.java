@@ -2,7 +2,7 @@ package com.ubs.m295.controller;
 
 import ch.ubs.m295.generated.v1.controller.GroupsApi;
 import ch.ubs.m295.generated.v1.dto.ChampionsLeagueGroup;
-import com.ubs.m295.jdbc.dao.GroupsDao;
+import com.ubs.m295.dao.GroupsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

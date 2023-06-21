@@ -2,11 +2,9 @@ package com.ubs.m295.controller;
 
 import ch.ubs.m295.generated.v1.controller.TeamsApi;
 import ch.ubs.m295.generated.v1.dto.Team;
-import com.ubs.m295.jdbc.dao.TeamsDao;
-import org.slf4j.ILoggerFactory;
+import com.ubs.m295.dao.TeamsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

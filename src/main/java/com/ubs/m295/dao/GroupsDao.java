@@ -1,4 +1,4 @@
-package com.ubs.m295.jdbc.dao;
+package com.ubs.m295.dao;
 
 import ch.ubs.m295.generated.v1.dto.ChampionsLeagueGroup;
 import org.springframework.jdbc.core.RowMapper;
