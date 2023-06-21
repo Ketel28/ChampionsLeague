@@ -50,6 +50,27 @@ As you can see it gives me some teams
 
 ![image](https://github.com/Ketel28/m295-Kerem-Telli/assets/96288839/7de49b20-8d3c-4ba4-823d-6e558467fed7)
 
+Some requests doesnt work because I authorized this **GET** request with a basic authorization.
+
+This requests only work with a username and password **(teams/5)**
+**USER ROLE**
+- username: kerem
+- password: 1234
+
+Without the username and password it will give you back an error
+
+![image](https://github.com/Ketel28/m295-Kerem-Telli/assets/96288839/00d8f713-747a-480a-991e-1505c858e4c2)
+
+With the username and password
+
+![image](https://github.com/Ketel28/m295-Kerem-Telli/assets/96288839/6be5c7ac-f193-4943-aa98-01268832be6e)
+
+
+
+
+
+
+
 
 
 
