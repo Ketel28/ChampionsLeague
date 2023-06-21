@@ -16,7 +16,7 @@ public class GroupsDao {
     private final static String insert = "INSERT INTO championsleaguegroup (groupName, totalPoints) VALUES (:groupName, :totalPoints)";
     private final static String selectAll = "SELECT * FROM championsleaguegroup";
     private final static String selectByName = "SELECT * FROM championsleaguegroup WHERE groupName = :groupName";
-    private final static String update = "UPDATE championsleaguegroup SET groupName = :groupName WHERE groupName = :groupName";
+    private final static String update = "UPDATE championsleaguegroup SET groupName = :groupName, totalPoints = :totalPoints WHERE groupName = :groupName";
     private final static String delete = "DELETE FROM championsleaguegroup WHERE groupName = :groupName";
 
 
@@ -79,7 +79,8 @@ public class GroupsDao {
 
     public boolean updateGroup(ChampionsLeagueGroup group) {
         MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("groupName", group.getGroupName());
+                .addValue("groupName", group.getGroupName().getValue())
+                .addValue("totalPoints", group.getTotalPoints());
         int inDb = namedParameterJdbcTemplate.update(update, params);
         if(inDb == 1){
             return true;

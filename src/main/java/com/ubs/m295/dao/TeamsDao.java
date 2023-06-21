@@ -32,7 +32,6 @@ public class TeamsDao {
     public void insertTeam(Team teams) {
 
         MapSqlParameterSource params = new MapSqlParameterSource()
-                .addValue("teamId", teams.getTeamId())
                 .addValue("teamName", teams.getTeamName())
                 .addValue("points", teams.getPoints())
                 .addValue("foundingYear", teams.getFoundingYear())
