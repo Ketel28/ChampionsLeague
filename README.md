@@ -38,7 +38,7 @@ Its also important for you to **clean** and **install** the **restapi.yaml** for
 For testing some requests you need (in my case) **Postman**
 
 Paste the **.yaml** file into **Swagger Editor** to see some example requests
-[Swagger Editor](https:/https://editor.swagger.io///)
+(https://editor.swagger.io///)
 
 ![image](https://github.com/Ketel28/m295-Kerem-Telli/assets/96288839/326afc78-1483-48a9-b2b6-7b00d216de71)
 
