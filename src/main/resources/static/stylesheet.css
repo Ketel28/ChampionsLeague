@@ -1,0 +1,157 @@
+@font-face {
+  font-family: 'ucl'; /* Gewünschter Name */
+  src: url('Champions-Bold.ttf');
+}
+
+html, body {
+  color: white;
+  font-family: ucl !important;
+  margin:0;
+  height:100%;
+}
+
+#ucl {
+  height: 100%;
+  background-image: url("ucl.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#title {
+  color: white;
+  padding-top: 100px;
+  font-size: 60px;
+  text-align: center;
+}
+
+/*table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }*/
+
+  .ptable table{
+    box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.7);
+    background-image: linear-gradient(180deg, 
+    hsl(226, 88%, 13%) 0%,
+    hsl(222, 74%, 19%) 9%,
+    hsl(219, 69%, 26%) 18%,
+    hsl(215, 69%, 32%) 27%,
+    hsl(214, 75%, 36%) 36%,
+    hsl(220, 74%, 37%) 45%,
+    hsl(234, 58%, 41%) 55%,
+    hsl(256, 66%, 39%) 64%,
+    hsl(256, 70%, 33%) 73%,
+    hsl(243, 63%, 28%) 82%,
+    hsl(231, 77%, 20%) 91%,
+    hsl(226, 88%, 13%) 100%
+  );
+    margin: 10px auto;
+    border-collapse: collapse;
+  }
+  
+  .ptable{
+    margin: 50px 0% 30px 0%;
+    
+  }
+  
+  th, td {
+      padding: 10px;
+  }
+
+  #verwalten1 {
+    background-color: transparent;
+    border-color: white;
+    margin: 5px;
+  }
+
+  #verwalten1:hover {
+    background-color: hsl(226, 88%, 13%);
+    border-color: white;
+    transition: all .5s;
+    transform : translateY(-5px);
+  }
+  
+  #verwalten2 {
+    background-color: transparent;
+    border-color: white;
+    margin: 5px;
+  }
+
+  #verwalten2:hover {
+    background-color: hsl(226, 88%, 13%);
+    border-color: white;
+    transition: all .5s;
+    transform : translateY(-5px);
+  }
+
+  .btn.btn-primary {
+    background-color: hsl(215, 69%, 32%);
+    border-color: white;
+  }
+
+  .btn.btn-primary:hover {
+    background-color: hsl(226, 88%, 13%);
+    border-color: white;
+    transition: all .5s;
+    transform : translateY(-5px);
+  }
+
+  th{
+  color: white;
+  }
+
+  tbody {
+    color: white;
+  }
+  
+  .headin{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+  }
+  
+  .wpos{
+    text-align: center;
+  }
+  
+  .wpos td{
+  }
+  
+  .pos{
+    text-align: center;
+  }
+  
+  .pos td{
+  }
+  
+  table .col{
+    border-bottom: 1px solid #FFFFFF;
+
+  }
+
+  tr {
+    border-bottom: 1px solid #FFFFFF;
+  }
+  
+  .wpos:hover{
+    background-color: #77ff21;
+  }
+  
+  .wpos:hover td{
+  }
+  
+  .pos:hover{
+    background-color: #ff7b21;
+  }
+  
+  .pos:hover td{
+  }
+
+  
